@@ -44,6 +44,7 @@ public class WebParseConfig {
 			props.load(in);
 		} catch (IOException e) {
 			logger.error("WebParse Porject: Config loaded failed!");
+			e.printStackTrace();
 		} finally {
 			try {
 				if (in != null)
@@ -71,6 +72,10 @@ public class WebParseConfig {
 			initConfig();
 		}
 		String result = props.getProperty(key);
+		if (result == null) {
+			logger.warn("WebParse Project: can't use the " + key
+					+ " obtain a value from config file!");
+		}
 		logger.debug("WebParse Project: Get a parameter from config, it's [key:"
 				+ key + "->" + result + "]");
 		return result;
