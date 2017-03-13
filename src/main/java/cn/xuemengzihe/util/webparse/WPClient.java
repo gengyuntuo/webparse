@@ -145,4 +145,14 @@ public class WPClient {
 		}
 		logger.info("WPClient: Logout!");
 	}
+
+	@Override
+	public String toString() {
+		return "WPClient [logger=" + logger + ", userSNO=" + userSNO
+				+ ", userName=" + userName + ", password=" + password
+				+ ", userState=" + userState + ", cookie=" + cookie
+				+ ", referer=" + referer + ", subUrl=" + subUrl
+				+ ", httpClient=" + httpClient + "]";
+	}
+
 }
