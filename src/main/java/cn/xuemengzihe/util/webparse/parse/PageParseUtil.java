@@ -3,9 +3,16 @@ package cn.xuemengzihe.util.webparse.parse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,5 +80,48 @@ public class PageParseUtil {
 				.select("input[name=__VIEWSTATE]").val(); // Jsoup解析
 		logger.debug("__VIEWSTATE->" + viewState);
 		return viewState;
+	}
+
+	/**
+	 * 使用JSOUP解析成绩查询结果页面，将其中的成绩解析出来
+	 * 
+	 * @param pageContent
+	 * @return 结果
+	 */
+	public static List<Map<String, String>> getScoreResult(String pageContent) {
+		List<Map<String, String>> scoreList = null; // 所有的成绩
+		Map<String, String> subjectScore = null; // 某一门课程的成绩信息
+		List<String> tableColsTitle = null; // 成绩查询结果的Table的列标题
+		Document page = Jsoup.parse(pageContent);
+		Elements elements = page.select("#Datagrid1");
+		if (elements == null) {
+			throw new RuntimeException("页面内容出错！没有找到table元素");
+		}
+		Element element = elements.get(0);
+		if (element == null) {
+			throw new RuntimeException("页面内容出错！没有找到table元素");
+		}
+
+		// 初始化集合
+		scoreList = new ArrayList<>();
+
+		// 依次遍历查询table中每一行的结果
+		for (Element tr : element.select("tr")) {
+			if (tableColsTitle == null) { // 读取第一行的table列标题
+				tableColsTitle = new ArrayList<>();
+				for (Element td : tr.select("td")) {
+					tableColsTitle.add(td.text().trim());
+				}
+				continue; // 读取完第一行，读取第二行
+			}
+			// 读取第二行
+			int index = 0;
+			subjectScore = new HashMap<>(); // 初始化科目
+			for (Element td : tr.select("td")) {
+				subjectScore.put(tableColsTitle.get(index++), td.text().trim());
+			}
+			scoreList.add(subjectScore);
+		}
+		return scoreList;
 	}
 }

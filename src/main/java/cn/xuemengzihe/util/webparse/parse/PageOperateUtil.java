@@ -175,8 +175,9 @@ public class PageOperateUtil {
 	 *            学期
 	 * @throws ErrorParseException
 	 *             页面解析失败异常
+	 * @return 成绩页面的HTML文本
 	 */
-	public static void queryScore(WPClient wpClient, String grade, String term)
+	public static String queryScore(WPClient wpClient, String grade, String term)
 			throws ErrorParseException {
 		HttpClient client = wpClient.getHttpClient();
 		HttpResponse response = null;
@@ -230,6 +231,7 @@ public class PageOperateUtil {
 			// System.out.println();
 			// }
 			// }
+			return pageContent;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ErrorParseException();
@@ -247,8 +249,9 @@ public class PageOperateUtil {
 	 *            学期
 	 * @throws ConnectException
 	 *             页面访问失败
+	 * @return 课表页面的HTML内容
 	 */
-	public static void queryClassSheet(WPClient wpClient, String grade,
+	public static String queryClassSheet(WPClient wpClient, String grade,
 			String term) throws ConnectException {
 		HttpClient client = wpClient.getHttpClient();
 		HttpResponse response = null;
@@ -288,6 +291,7 @@ public class PageOperateUtil {
 			pageContent = PageParseUtil.getHTMLContent(response);
 			logger.debug("Class Sheet Query Result Page:");
 			logger.debug(pageContent);
+			return pageContent;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ConnectException();

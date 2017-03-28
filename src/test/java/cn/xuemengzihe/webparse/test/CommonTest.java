@@ -6,6 +6,7 @@ import cn.xuemengzihe.util.webparse.WPClient;
 import cn.xuemengzihe.util.webparse.exception.ConnectException;
 import cn.xuemengzihe.util.webparse.exception.ErrorParseException;
 import cn.xuemengzihe.util.webparse.parse.PageOperateUtil;
+import cn.xuemengzihe.util.webparse.parse.PageParseUtil;
 
 public class CommonTest {
 	@Test
@@ -19,7 +20,8 @@ public class CommonTest {
 		System.out
 				.println("***********************************************************");
 		System.out.println(client);
-		PageOperateUtil.queryScore(client, "1", "1");
+		String temp = PageOperateUtil.queryScore(client, "1", "1");
+		System.out.println(PageParseUtil.getScoreResult(temp));
 		System.out.println(client);
 		client.logout();
 	}
