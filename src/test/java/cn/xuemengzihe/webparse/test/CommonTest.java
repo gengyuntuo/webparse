@@ -15,12 +15,9 @@ public class CommonTest {
 		client.setUserSNO("1303050422");
 		client.setUserName("李春");
 		client.setPassword("140222199501057517");
-
 		client.login();
-		System.out
-				.println("***********************************************************");
 		System.out.println(client);
-		String temp = PageOperateUtil.queryScore(client, "1", "1");
+		String temp = PageOperateUtil.queryScore(client, "2013-2014", "1");
 		System.out.println(PageParseUtil.getScoreResult(temp));
 		System.out.println(client);
 		client.logout();
