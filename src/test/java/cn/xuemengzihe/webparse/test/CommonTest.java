@@ -2,11 +2,11 @@ package cn.xuemengzihe.webparse.test;
 
 import org.junit.Test;
 
-import cn.xuemengzihe.util.webparse.WPClient;
 import cn.xuemengzihe.util.webparse.exception.ConnectException;
 import cn.xuemengzihe.util.webparse.exception.ErrorParseException;
 import cn.xuemengzihe.util.webparse.parse.PageOperateUtil;
 import cn.xuemengzihe.util.webparse.parse.PageParseUtil;
+import cn.xuemengzihe.util.webparse.parse.WPClient;
 
 public class CommonTest {
 	@Test

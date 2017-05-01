@@ -124,4 +124,19 @@ public class PageParseUtil {
 		}
 		return scoreList;
 	}
+
+	/**
+	 * 根据登录页面获取用户名
+	 * 
+	 * @param content
+	 * @return
+	 */
+	public static String getUserName(String content) {
+		Document page = Jsoup.parse(content);
+		// 获取包含用户名称的元素的内容（例如：<span id="xhxm">1303050422 李春同学</span>）
+		String userName = page.getElementById("xhxm").text();
+		userName = userName.split(" ")[1];
+		userName = userName.substring(0, userName.lastIndexOf("同学"));
+		return userName;
+	}
 }

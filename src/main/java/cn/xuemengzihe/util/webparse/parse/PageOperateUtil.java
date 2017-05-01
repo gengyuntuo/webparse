@@ -15,7 +15,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cn.xuemengzihe.util.webparse.WPClient;
 import cn.xuemengzihe.util.webparse.conf.ConfigName;
 import cn.xuemengzihe.util.webparse.conf.WebParseConfig;
 import cn.xuemengzihe.util.webparse.exception.ConnectException;
@@ -25,12 +24,14 @@ import cn.xuemengzihe.util.webparse.exception.URLException;
 /**
  * <h1>教学网的操作</h1>
  * <p>
- * 该类封装了对教学网的一些操作（登录、页面请求、注销）
+ * 该类封装了对教学网的一些操作（登录、页面请求、注销）<br/>
+ * <b>注意:</b> 请使用{@link cn.xuemengzihe.util.webparse.WPClient}
  * </p>
  * 
  * @author 李春
  * @time 2017年3月12日 上午11:49:06
  */
+@Deprecated
 public class PageOperateUtil {
 	private static Logger logger = LoggerFactory
 			.getLogger(PageOperateUtil.class);
@@ -259,7 +260,7 @@ public class PageOperateUtil {
 		String pageContent = null;
 		String url = null;
 		try {
-			url = getUserURL(wpClient, ConfigName.PAGE_XSKBXC); // 获取URL
+			url = getUserURL(wpClient, ConfigName.PAGE_XSKBCX); // 获取URL
 			postReq = new HttpPost(url);
 			// postReq.setHeader("Cookie", wpClient.getCookie());
 			postReq.setHeader("Referer", wpClient.getReferer());
