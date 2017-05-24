@@ -8,6 +8,7 @@ import cn.xuemengzihe.util.webparse.parse.PageOperateUtil;
 import cn.xuemengzihe.util.webparse.parse.PageParseUtil;
 import cn.xuemengzihe.util.webparse.parse.WPClient;
 
+@SuppressWarnings("deprecation")
 public class CommonTest {
 	@Test
 	public void test() throws ErrorParseException {
